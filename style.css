@@ -66,8 +66,20 @@ body {
   .AC,
   .DEL {
     width: 92px;
+    background-color: #ffa500;
   }
 
   .equals {
     width: 137px;
+    background-color: #352F44;
+    color: white;
+    border: solid white 1px;
+    
+  }
+
+  .displaySum,
+  .displayTotal {
+    text-align: right;
+    color: #B9B4C7;
+    margin-right: 10px;
   }
