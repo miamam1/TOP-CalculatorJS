@@ -11,12 +11,15 @@ let operators = {
 //credit: https://stackoverflow.com/questions/67650776/is-there-a-way-to-store-an-arithmetic-operator-in-a-variable-and-use-the-variabl
 function Calculations(number1, number2, operator) {
     if(operator in operators) {
-        return operators[operator](number1,number2)
+        displayTotal.textContent = operators[operator](number1,number2)
     }
     else {
         return console.log("you stupid")
     }
-}
+} // run this function when clicking equals, then somehow make the first number the total from the calculation and deletable
+
+
+
 //doesnt really work on bidmas btw
 //the calculator only evaluates two numbers at a time, so if you pick a second operation, the reuslt
 //of the first two numbers would show before doing further calcualtions.
@@ -28,3 +31,79 @@ function Calculations(number1, number2, operator) {
 //this might make my life harder but could try to condense the operator functions into one by:
 // having the function have three parms, number 1, number2, and operator
 // convert it 
+
+
+function showInput(number) {
+     firstSumNumber.textContent += number
+     return firstSumNumber
+
+}
+
+function showSymbol(aSymbol) {
+    symbol.textContent = aSymbol
+    return symbol
+}
+
+//could have an array which loops with the latest number addded and the previous number
+// e.g. [0,1,2,3,5]
+//running showinput would add this to the array, then when calling the function to calculate use index -1 to get last number and index.length -2 to get number before that one
+// and use those as the two numbers
+//but then also need to consider that would probably crash the program.. idk
+
+
+const displaySum = document.getElementById("displaySum")
+let firstSumNumber = document.getElementById("firstSumNumber")
+let symbol = document.getElementById("symbol")
+let displayTotal = document.getElementById("displayTotal")
+const number1 = document.getElementById("number1")
+const number2 = document.getElementById("number2")
+const number3 = document.getElementById("number3")
+const number4 = document.getElementById("number4")
+const number5 = document.getElementById("number5")
+const number6 = document.getElementById("number6")
+const number7 = document.getElementById("number7")
+const number8 = document.getElementById("number8")
+const number9 = document.getElementById("number9")
+const number0 = document.getElementById("number0")
+
+
+const add = document.getElementById("add")
+const dot = document.getElementById("dot")
+const divide = document.getElementById("divide")
+const equals = document.getElementById("equals")
+const multiply = document.getElementById("multiply")
+const minus = document.getElementById("minus")
+
+number1.addEventListener('click', () => showInput(1))
+number2.addEventListener('click', () => showInput(2))
+number3.addEventListener('click', () => showInput(3))
+number4.addEventListener('click', () => showInput(4))
+number5.addEventListener('click', () => showInput(5))
+number6.addEventListener('click', () => showInput(6))
+number7.addEventListener('click', () => showInput(7))
+number8.addEventListener('click', () => showInput(8))
+number9.addEventListener('click', () => showInput(9))
+number0.addEventListener('click', () => showInput(0))
+
+
+
+
+equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), 2, symbol.textContent))
+
+//need to change multiply and divide to fit the span hhtml in quotes so it shows an actual * symbol and not *
+multiply.addEventListener('click', () => showSymbol("*"))
+divide.addEventListener('click', () => showSymbol("/"))
+add.addEventListener('click', () => showSymbol("+"))
+minus.addEventListener('click', () => showSymbol("-"))
+dot.addEventListener('click', () => showInput("."))
+
+//known problems:
+/*
+- need to implment second number functoianility cus rn its only first (could do a check for length for the symbol, and if its 0 then your still on the first num if 1 then your adding ot the second)
+- no way to do minus calculations (e.g. -2 - - 2 )
+- need to to implement clear and del funcionality
+- * and / dont show the correct symbol on the screen, easy fix i think just go in dictionary used for checks and change the "*" and "/" to the html/css patern names
+
+
+
+*/
