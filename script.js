@@ -10,13 +10,21 @@ let operators = {
 }
 //credit: https://stackoverflow.com/questions/67650776/is-there-a-way-to-store-an-arithmetic-operator-in-a-variable-and-use-the-variabl
 function Calculations(number1, number2, operator) {
+    if(firstSumNumber.textContent.length == 0) {
+        number1 = 0
+        firstSumNumber.textContent += "0"
+    }
+    
     if(operator in operators) {
         displayTotal.textContent = operators[operator](number1,number2)
+        equalsSum.textContent = "="
+        return firstSumNumberValue = operators[operator](number1, number2)
         
     }
     else {
         return console.log("you stupid")
     }
+    
 } // run this function when clicking equals, then somehow make the first number the total from the calculation and deletable
 
 
@@ -37,18 +45,26 @@ function Calculations(number1, number2, operator) {
 function showInput(number) {
     if(symbol.innerHTML === "") {
         firstSumNumber.textContent += number
-        return firstSumNumber
+        
 
     }
     else {
         secondSumNumber.textContent += number
-        return secondSumNumber
+        
     }
      
 
 }
 
 function showSymbol(aSymbol) {
+    if(equalsSum.textContent.length > 0) {
+        equalsSum.textContent = ""
+        firstSumNumber.textContent = displayTotal.textContent
+        secondSumNumber.textContent = ""
+        
+
+
+    }
     if(aSymbol == "*") {
         symbol.innerHTML = "<span>&#215;</span>"
         symbolValue = aSymbol
@@ -75,9 +91,24 @@ function clearAllFN() {
     symbol.innerHTML = ""
     symbolValue = ""
     displayTotal.textContent = "0"
+    equalsSum.textContent = ""
     
 
 }
+
+
+function deleteFN() {
+    //idea: do a while loop for each number until they their length is 0 then go onto next number
+    if(secondSumNumber.textContent.length !== 0) {
+        secondSumNumber.textContent.slice(0, -1)
+        return console.log(secondSumNumber.textContent)
+    }
+    //this works logically but for some reason slice doesnt slice but there is a console log
+    //if you put like text content lol or smth it does update so ?
+}
+
+
+
 
 //could have an array which loops with the latest number addded and the previous number
 // e.g. [0,1,2,3,5]
@@ -89,9 +120,11 @@ function clearAllFN() {
 const displaySum = document.getElementById("displaySum")
 let firstSumNumber = document.getElementById("firstSumNumber")
 let secondSumNumber = document.getElementById("secondSumNumber")
+
 let symbol = document.getElementById("symbol")
 let symbolValue
 let displayTotal = document.getElementById("displayTotal")
+let equalsSum = document.getElementById("equalsSum")
 const number1 = document.getElementById("number1")
 const number2 = document.getElementById("number2")
 const number3 = document.getElementById("number3")
@@ -105,12 +138,14 @@ const number0 = document.getElementById("number0")
 
 
 const allClear = document.getElementById("allClear")
+const delBTN = document.getElementById("delBTN")
 const add = document.getElementById("add")
 const dot = document.getElementById("dot")
 const divide = document.getElementById("divide")
 const equals = document.getElementById("equals")
 const multiply = document.getElementById("multiply")
 const minus = document.getElementById("minus")
+
 
 number1.addEventListener('click', () => showInput(1))
 number2.addEventListener('click', () => showInput(2))
@@ -122,7 +157,7 @@ number7.addEventListener('click', () => showInput(7))
 number8.addEventListener('click', () => showInput(8))
 number9.addEventListener('click', () => showInput(9))
 number0.addEventListener('click', () => showInput(0))
-
+delBTN.addEventListener('click', () => deleteFN())
 
 
 
@@ -135,12 +170,13 @@ add.addEventListener('click', () => showSymbol("+"))
 minus.addEventListener('click', () => showSymbol("-"))
 dot.addEventListener('click', () => showInput("."))
 allClear.addEventListener('click', () => clearAllFN())
+
 //known problems:
 /*
-- need to implment second number functoianility cus rn its only first (could do a check for length for the symbol, and if its 0 then your still on the first num if 1 then your adding ot the second)
+
 - no way to do minus calculations (e.g. -2 - - 2 )
-- need to to implement clear and del funcionality
-- * and / dont show the correct symbol on the screen, easy fix i think just go in dictionary used for checks and change the "*" and "/" to the html/css patern names
+- need to to implement  del funcionality
+- 
 
 
 
