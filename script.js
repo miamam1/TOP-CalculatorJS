@@ -5,6 +5,7 @@ let operators = {
     "/": (a,b) => a / b,
 
 }
+let sillyguyCount = 0
 //credit: https://stackoverflow.com/questions/67650776/is-there-a-way-to-store-an-arithmetic-operator-in-a-variable-and-use-the-variabl
 function Calculations(number1, number2, operator) {
     if(secondSumNumber.textContent.length == 0) {
@@ -12,8 +13,25 @@ function Calculations(number1, number2, operator) {
     }
     if(number2 == 0 && operator == "/") {
         alert("no.")
-        return
+        sillyguyCount += 1
+        if(sillyguyCount === 2) {
+            alert("Hey! I already told you!")
+            
+        }
+        if(sillyguyCount === 5) {
+            alert("Whats your problem?")
+        }
+        if(sillyguyCount === 9) {
+            alert("Try it again. I dare you.")
+        }
+        if(sillyguyCount === 10) {
+            alert(">:(")
+            close()
+        }
+        return 
+        
     }
+    
     if(firstSumNumber.textContent.length == 0) {
         number1 = 0
         firstSumNumber.textContent = "0"
@@ -246,6 +264,11 @@ window.onkeydown = function(event) {
     }
     if(event.keyCode == 27) {
         clearAllFN()
+
+    }
+    //dot function 
+    if(event.keyCode == 190) {
+        showInput(".")
 
     }
 
