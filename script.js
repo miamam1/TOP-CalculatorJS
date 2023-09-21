@@ -3,17 +3,22 @@ let operators = {
     "-": (a,b) => a - b,
     "*": (a,b) => a * b,
     "/": (a,b) => a / b,
-    //ok so trying to understand how this works i think:
-    //when you use one of the operators as a key (e..g "+") it calls that arrow function
-    //alot nicer looking and less code than writing four diff functions, tho knowing me
-    // i will probably have to debug / rewrite this later 
+
 }
 //credit: https://stackoverflow.com/questions/67650776/is-there-a-way-to-store-an-arithmetic-operator-in-a-variable-and-use-the-variabl
 function Calculations(number1, number2, operator) {
+    if(secondSumNumber.textContent.length == 0) {
+        return 
+    }
+    if(number2 == 0 && operator == "/") {
+        alert("no.")
+        return
+    }
     if(firstSumNumber.textContent.length == 0) {
         number1 = 0
         firstSumNumber.textContent = "0"
     }
+
     
     if(operator in operators) {
         displayTotal.textContent = operators[operator](number1,number2)
@@ -25,21 +30,11 @@ function Calculations(number1, number2, operator) {
         return console.log("you stupid")
     }
     
-} // run this function when clicking equals, then somehow make the first number the total from the calculation and deletable
+} 
 
 
 
-//doesnt really work on bidmas btw
-//the calculator only evaluates two numbers at a time, so if you pick a second operation, the reuslt
-//of the first two numbers would show before doing further calcualtions.
-//i.e. 23 + 23 - 2
-//first step: 23 + 23 = 46
-// 46 - 2
-// on the calc would show 46 first, then 46 -2 then 42 if that makes sense 
 
-//this might make my life harder but could try to condense the operator functions into one by:
-// having the function have three parms, number 1, number2, and operator
-// convert it 
 
 
 function showInput(number) {
@@ -102,6 +97,7 @@ function deleteFN() {
         displayTotal.textContent = displayTotal.textContent.slice(0,-1)
         return
     }
+    
 
     if(equalsSum.textContent.length > 0 ) {
         equalsSum.textContent = equalsSum.textContent.slice(0,-1)
@@ -125,21 +121,12 @@ function deleteFN() {
         firstSumNumber.textContent = firstSumNumber.textContent.slice(0,-1)
         return
     }
-
-
-
-    //this works logically but for some reason slice doesnt slice but there is a console log
-    //if you put like text content lol or smth it does update so ?
 }
 
 
 
 
-//could have an array which loops with the latest number addded and the previous number
-// e.g. [0,1,2,3,5]
-//running showinput would add this to the array, then when calling the function to calculate use index -1 to get last number and index.length -2 to get number before that one
-// and use those as the two numbers
-//but then also need to consider that would probably crash the program.. idk
+
 
 
 const displaySum = document.getElementById("displaySum")
@@ -188,7 +175,7 @@ delBTN.addEventListener('click', () => deleteFN())
 
 equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), parseFloat(secondSumNumber.textContent) , symbolValue))
 
-//need to change multiply and divide to fit the span hhtml in quotes so it shows an actual * symbol and not *
+
 multiply.addEventListener('click', () => showSymbol("*"))
 divide.addEventListener('click', () => showSymbol("/"))
 add.addEventListener('click', () => showSymbol("+"))
@@ -200,9 +187,66 @@ allClear.addEventListener('click', () => clearAllFN())
 /*
 
 - no way to do minus calculations (e.g. -2 - - 2 )
-- need to to implement  del funcionality
 - 
 
 
 
 */
+
+window.onkeydown = function(event) {
+    if(event.keyCode == 49) {
+        showInput(1)
+    }
+    if(event.keyCode == 50) {
+        showInput(2)
+    }
+    if(event.keyCode == 51) {
+        showInput(3)
+    }
+    if(event.keyCode == 52) {
+        showInput(4)
+    }
+    if(event.keyCode == 53) {
+        showInput(5)
+    }
+    if(event.keyCode == 54) {
+        showInput(6)
+    }
+    if(event.keyCode == 55) {
+        showInput(7)
+    }
+    if(event.keyCode == 56) {
+        showInput(8)
+    }
+    if(event.keyCode == 57) {
+        showInput(9)
+    }
+    if(event.keyCode == 48) {
+        showInput(0)
+    }
+    if(event.keyCode == 187) {
+        showSymbol("+")
+    }
+    if(event.keyCode == 189) {
+        showSymbol("-")
+    }
+    if(event.keyCode == 191) {
+        showSymbol("/")
+    }
+    if(event.keyCode == 56) {
+        showSymbol("*")
+    }
+    if(event.keyCode == 13) {
+        Calculations(parseFloat(firstSumNumber.textContent), parseFloat(secondSumNumber.textContent) , symbolValue)
+
+    }
+    if(event.keyCode == 8) {
+        deleteFN()
+
+    }
+    if(event.keyCode == 27) {
+        clearAllFN()
+
+    }
+
+}
