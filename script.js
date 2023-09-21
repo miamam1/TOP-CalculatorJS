@@ -12,7 +12,7 @@ let operators = {
 function Calculations(number1, number2, operator) {
     if(firstSumNumber.textContent.length == 0) {
         number1 = 0
-        firstSumNumber.textContent += "0"
+        firstSumNumber.textContent = "0"
     }
     
     if(operator in operators) {
@@ -98,11 +98,36 @@ function clearAllFN() {
 
 
 function deleteFN() {
-    //idea: do a while loop for each number until they their length is 0 then go onto next number
-    if(secondSumNumber.textContent.length !== 0) {
-        secondSumNumber.textContent.slice(0, -1)
-        return console.log(secondSumNumber.textContent)
+    if(displayTotal.textContent.length > 0) {
+        displayTotal.textContent = displayTotal.textContent.slice(0,-1)
+        return
     }
+
+    if(equalsSum.textContent.length > 0 ) {
+        equalsSum.textContent = equalsSum.textContent.slice(0,-1)
+        return 
+    }
+ 
+
+    if(secondSumNumber.textContent.length > 0) {
+        secondSumNumber.textContent = secondSumNumber.textContent.slice(0, -1)
+        return
+        
+    }
+
+    if(symbol.textContent.length > 0) {
+        symbol.textContent = symbol.textContent.slice(0,-1)
+        return 
+    }
+
+    
+    if(firstSumNumber.textContent.length > 0) {
+        firstSumNumber.textContent = firstSumNumber.textContent.slice(0,-1)
+        return
+    }
+
+
+
     //this works logically but for some reason slice doesnt slice but there is a console log
     //if you put like text content lol or smth it does update so ?
 }
