@@ -12,6 +12,7 @@ let operators = {
 function Calculations(number1, number2, operator) {
     if(operator in operators) {
         displayTotal.textContent = operators[operator](number1,number2)
+        
     }
     else {
         return console.log("you stupid")
@@ -50,21 +51,32 @@ function showInput(number) {
 function showSymbol(aSymbol) {
     if(aSymbol == "*") {
         symbol.innerHTML = "<span>&#215;</span>"
-        symbol = "*"
-        return symbol
+        symbolValue = aSymbol
+        return symbolValue
     }
     if(aSymbol == "/") {
         symbol.innerHTML = "<span>&#247;</span>"
-        symbol = "/"
-        return symbol
+        symbolValue = aSymbol
+        return symbolValue
     }
     else {
         symbol.textContent = aSymbol
-        symbol = aSymbol
-        return symbol
-
+        symbolValue = aSymbol
+        return symbolValue
     }
     
+}
+
+
+
+function clearAllFN() {
+    firstSumNumber.textContent = ""
+    secondSumNumber.textContent = ""
+    symbol.innerHTML = ""
+    symbolValue = ""
+    displayTotal.textContent = "0"
+    
+
 }
 
 //could have an array which loops with the latest number addded and the previous number
@@ -78,6 +90,7 @@ const displaySum = document.getElementById("displaySum")
 let firstSumNumber = document.getElementById("firstSumNumber")
 let secondSumNumber = document.getElementById("secondSumNumber")
 let symbol = document.getElementById("symbol")
+let symbolValue
 let displayTotal = document.getElementById("displayTotal")
 const number1 = document.getElementById("number1")
 const number2 = document.getElementById("number2")
@@ -91,6 +104,7 @@ const number9 = document.getElementById("number9")
 const number0 = document.getElementById("number0")
 
 
+const allClear = document.getElementById("allClear")
 const add = document.getElementById("add")
 const dot = document.getElementById("dot")
 const divide = document.getElementById("divide")
@@ -112,7 +126,7 @@ number0.addEventListener('click', () => showInput(0))
 
 
 
-equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), parseFloat(secondSumNumber.textContent) , symbol))
+equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), parseFloat(secondSumNumber.textContent) , symbolValue))
 
 //need to change multiply and divide to fit the span hhtml in quotes so it shows an actual * symbol and not *
 multiply.addEventListener('click', () => showSymbol("*"))
@@ -120,7 +134,7 @@ divide.addEventListener('click', () => showSymbol("/"))
 add.addEventListener('click', () => showSymbol("+"))
 minus.addEventListener('click', () => showSymbol("-"))
 dot.addEventListener('click', () => showInput("."))
-
+allClear.addEventListener('click', () => clearAllFN())
 //known problems:
 /*
 - need to implment second number functoianility cus rn its only first (could do a check for length for the symbol, and if its 0 then your still on the first num if 1 then your adding ot the second)

@@ -11,7 +11,7 @@ body {
     width: 400px;
     height: 600px;
     display: flex;
-    padding-bottom: 12px;
+    padding-bottom: 20px;
     padding-top: 12px;
     flex-wrap: wrap;
     border-radius: 7px;
@@ -49,7 +49,11 @@ body {
     border-radius: 7px;
     margin: 20px;
     height: 125px;
+    display: flex;
     justify-self: center;
+    justify-content: end;
+    flex-direction: column;
+    align-items: end;
   }
 
   .container1,
@@ -82,5 +86,12 @@ body {
   .displayTotal {
     text-align: right;
     color: #B9B4C7;
-    margin-right: 10px;
+    margin-right: 20px;
+    
+    
   }
+
+.displaySum {
+  margin-bottom: -7px;
+
+}
