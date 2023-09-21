@@ -34,14 +34,37 @@ function Calculations(number1, number2, operator) {
 
 
 function showInput(number) {
-     firstSumNumber.textContent += number
-     return firstSumNumber
+    if(symbol.innerHTML === "") {
+        firstSumNumber.textContent += number
+        return firstSumNumber
+
+    }
+    else {
+        secondSumNumber.textContent += number
+        return secondSumNumber
+    }
+     
 
 }
 
 function showSymbol(aSymbol) {
-    symbol.textContent = aSymbol
-    return symbol
+    if(aSymbol == "*") {
+        symbol.innerHTML = "<span>&#215;</span>"
+        symbol = "*"
+        return symbol
+    }
+    if(aSymbol == "/") {
+        symbol.innerHTML = "<span>&#247;</span>"
+        symbol = "/"
+        return symbol
+    }
+    else {
+        symbol.textContent = aSymbol
+        symbol = aSymbol
+        return symbol
+
+    }
+    
 }
 
 //could have an array which loops with the latest number addded and the previous number
@@ -53,6 +76,7 @@ function showSymbol(aSymbol) {
 
 const displaySum = document.getElementById("displaySum")
 let firstSumNumber = document.getElementById("firstSumNumber")
+let secondSumNumber = document.getElementById("secondSumNumber")
 let symbol = document.getElementById("symbol")
 let displayTotal = document.getElementById("displayTotal")
 const number1 = document.getElementById("number1")
@@ -88,7 +112,7 @@ number0.addEventListener('click', () => showInput(0))
 
 
 
-equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), 2, symbol.textContent))
+equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), parseFloat(secondSumNumber.textContent) , symbol))
 
 //need to change multiply and divide to fit the span hhtml in quotes so it shows an actual * symbol and not *
 multiply.addEventListener('click', () => showSymbol("*"))
