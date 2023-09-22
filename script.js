@@ -57,17 +57,54 @@ function Calculations(number1, number2, operator) {
 
 function showInput(number) {
     if(symbol.innerHTML === "") {
-        firstSumNumber.textContent += number
+        if(number == "." && firstSumNumber.textContent.includes(".")) {
+            return
+            
+        }
+        if(number == "-" && firstSumNumber.textContent.includes("-")) {
+            firstSumNumber.textContent = firstSumNumber.textContent.replace("-", " ")
+            return 
+        } 
+        if(firstSumNumber.textContent.includes("-") == false && number == "-") {
+            firstSumNumber.textContent = ["-", firstSumNumber.textContent].join('')
+        }
+        else {
+            firstSumNumber.textContent += number
+
+        }
+        
+        
+        
+     
+        
         
 
     }
     else {
-        secondSumNumber.textContent += number
+        if(number == "." && secondSumNumber.textContent.includes(".")) {
+            return
+            
+        }
+        if(number == "-" && secondSumNumber.textContent.includes("-")) {
+            secondSumNumber.textContent = secondSumNumber.textContent.replace("-", " ")
+            return 
+        } 
+        if(secondSumNumber.textContent.includes("-") == false && number == "-") {
+            secondSumNumber.textContent = ["-", secondSumNumber.textContent].join('')
+        }
+        else {
+            secondSumNumber.textContent += number
+
+        } 
+        
+        
         
     }
      
 
 }
+
+
 
 function showSymbol(aSymbol) {
     if(equalsSum.textContent.length > 0) {
@@ -147,6 +184,7 @@ function deleteFN() {
 
 
 
+
 const displaySum = document.getElementById("displaySum")
 let firstSumNumber = document.getElementById("firstSumNumber")
 let secondSumNumber = document.getElementById("secondSumNumber")
@@ -175,7 +213,7 @@ const divide = document.getElementById("divide")
 const equals = document.getElementById("equals")
 const multiply = document.getElementById("multiply")
 const minus = document.getElementById("minus")
-
+const minusORequal = document.getElementById("minusORequal")
 
 number1.addEventListener('click', () => showInput(1))
 number2.addEventListener('click', () => showInput(2))
@@ -188,7 +226,7 @@ number8.addEventListener('click', () => showInput(8))
 number9.addEventListener('click', () => showInput(9))
 number0.addEventListener('click', () => showInput(0))
 delBTN.addEventListener('click', () => deleteFN())
-
+minusORequal.addEventListener('click', () => showInput('-'))
 
 
 equals.addEventListener('click', () => Calculations(parseFloat(firstSumNumber.textContent), parseFloat(secondSumNumber.textContent) , symbolValue))
@@ -201,15 +239,7 @@ minus.addEventListener('click', () => showSymbol("-"))
 dot.addEventListener('click', () => showInput("."))
 allClear.addEventListener('click', () => clearAllFN())
 
-//known problems:
-/*
 
-- no way to do minus calculations (e.g. -2 - - 2 )
-- 
-
-
-
-*/
 
 window.onkeydown = function(event) {
     if(event.keyCode == 49) {
@@ -233,7 +263,7 @@ window.onkeydown = function(event) {
     if(event.keyCode == 55) {
         showInput(7)
     }
-    if(event.keyCode == 56) {
+    if(event.key == 8) {
         showInput(8)
     }
     if(event.keyCode == 57) {
@@ -251,7 +281,7 @@ window.onkeydown = function(event) {
     if(event.keyCode == 191) {
         showSymbol("/")
     }
-    if(event.keyCode == 56) {
+    if(event.key === "*") {
         showSymbol("*")
     }
     if(event.keyCode == 13) {
@@ -266,10 +296,13 @@ window.onkeydown = function(event) {
         clearAllFN()
 
     }
-    //dot function 
+    
     if(event.keyCode == 190) {
         showInput(".")
 
     }
-
+    if(event.keyCode == 77) {
+        showInput("-")
+    }
+    
 }
